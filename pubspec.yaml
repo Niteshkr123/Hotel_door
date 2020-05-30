@@ -21,6 +21,8 @@ dependencies:
     sdk: flutter
   splashscreen: ^1.2.0
   pull_to_refresh: ^1.5.8
+  flutter_offline: ^0.3.0
+  connectivity: ^0.4.8+6
 
 
   # The following adds the Cupertino Icons font to your application.
