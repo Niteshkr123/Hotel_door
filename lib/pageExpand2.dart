@@ -106,17 +106,28 @@ class _ExpandState extends State<Expand1> {
 
                             setState(() {
                               if (qrCodeResult == codeScanner) {
-                                return null;
+                                return showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: Image.asset('splashGIF/welcome.gif'),
+                                  );
+                                }
+                                );
                               } else
                                 return showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: Text("Alert Dialog"),
-                                        content: Text("Dialog Content"),
+                                        backgroundColor: Colors.white,
+                                        title: Text("Entry Prohibited",),
+                                        content: Text("Try Again\n May be its not your room."),
                                         actions: <Widget>[
                                           FlatButton(
-                                              child: Text("Close"),
+                                              child: Text("Close",
+                                              style: TextStyle(
+                                                color: Colors.black87
+                                              ),),
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               })
