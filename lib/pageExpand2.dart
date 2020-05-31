@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'scan.dart';
+import 'package:barcode_scan/barcode_scan.dart';
+
 
 class Expand1 extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class Expand1 extends StatefulWidget {
 }
 
 class _ExpandState extends State<Expand1> {
+  String qrCodeResult = "google";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,12 +100,37 @@ class _ExpandState extends State<Expand1> {
                             vertical: 16.0,
                             horizontal: 32.0,
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Scan()),
-                            );
+                          onPressed: () async {
+                            String codeScanner =
+                            await BarcodeScanner.scan(); //barcode scanner
+
+                            setState(() {
+                              if (qrCodeResult == codeScanner) {
+                                return null;
+                              } else
+                                return showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Alert Dialog"),
+                                        content: Text("Dialog Content"),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                              child: Text("Close"),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              })
+                                        ],
+                                      );
+                                    });
+                            });
+
+                            // try{
+                            //   BarcodeScanner.scan()    this method is used to scan the QR code
+                            // }catch (e){
+                            //   BarcodeScanner.CameraAccessDenied;   we can print that user has denied for the permisions
+                            //   BarcodeScanner.UserCanceled;   we can print on the page that user has cancelled
+                            // }
                           },
                         ),
                       ),
